@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Clothing Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="gridcontainer">
+        <header class="header">                     <!-- Header -->
+            
+            <a href="index.html" id="logoLink">
+            <div class="logo"> <!-- Logo -->
+                <img src="svg/Logo.svg" alt="Company Logo" class="header-logo">
+            </div>
+            </a>
+    
+            <div class="options">
+                <button id="themeButton" aria-label="Toggle page theme" data-theme-toggle><img id="themeImg" src="svg/light-theme.svg"></button>
+            </div>
+
+            <div class="searchbar" role="Search Bar">
+                <form action="#" method="get">
+                    <input type="text" class="searchInput" placeholder="Search products.." aria-label="Search Products input">
+                    <button type="submit" class="searchButton" alt="Search Button"><img src="svg/circle-arrow-right(2).svg" alt="O"></button>
+                </form>
+            </div>
+        </header>
+
+        <nav class="navbar" role="navigation">                        <!-- Navbar -->
+            <ul class="navlist">
+                <li><a href="index.html" alt="Homepage hyperlink" id="first">Home</a></li>
+                <li><a href="products.html" alt="Products page hyperlink">Products</a></li>
+                <li><a href="checkout.html" alt="Checkout page hyperlink">Checkout</a></li>
+                <li><a href="contact.html" alt="Contact page hyperlink" id="last">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main-container">                <!-- Main -->
+
+            <div class="widebox">
+                <img src="img/plushy-rack.jpg" alt="Stacked shelves with plushie cuddly toys">
+            </div> 
+
+            <div class="scroll-box-container"> 
+                <h1>Showcase</h1>
+                <ul>
+                <a href="product-details.html"><li class="scroll-box_item"><img src="img/baby-chick.jpg" alt="Crocheted Yellow Baby Chicken"><div class="hot-ribbon">Hot!</div></li></a>
+                <a href="product-details.html"><li class="scroll-box_item"><img src="img/green-dino.jpg" alt="Fuzzy plush toy of a green dinosaur"><div class="hot-ribbon">Hot!</div></li></a>
+                <a href="product-details.html"><li class="scroll-box_item"><img src="img/cuddly-owl.jpg" alt="Plush toy barn owl"></li></a>
+                <a href="product-details.html"><li class="scroll-box_item"><img src="img/crochet-tiger.jpg" alt="Crocheted Orange Tiger with a yellow scarf"><div class="hot-ribbon">Hot!</div></li></a>
+                <a href="product-details.html"><li class="scroll-box_item"><img src="img/rabbit.jpg" alt="Rabbit teddy toy in a spotted dress"></li></a>
+                <a href="product-details.html"><li class="scroll-box_item"><img src="img/fuzzy-koala.jpg" alt="fuzzy Koala cuddly toy sat on the ground"><div class="hot-ribbon">Hot!</div></li></a>
+                </ul>
+            </div>
+
+            <div class="widebox">
+                <img src="img/clothing-line-hats.jpg" alt="Clothes line with hats depicting cute faces pinned to it">
+            </div> 
+
+            
+            <div class="scroll-box-container">
+                <ul>
+                    <a href="product-details.html"><li class="scroll-box_item"><img src="img/cuddly-owl.jpg" alt="Plush toy barn owl"></li></a>
+                    <a href="product-details.html"><li class="scroll-box_item"><img src="img/crochet-tiger.jpg" alt="Crocheted Orange Tiger with a yellow scarf"><div class="hot-ribbon">Hot!</div></li></a>
+                    <a href="product-details.html"><li class="scroll-box_item"><img src="img/fuzzy-koala.jpg" alt="fuzzy Koala cuddly toy sat on the ground"><div class="hot-ribbon">Hot!</div></li></a>
+                    <a href="product-details.html"><li class="scroll-box_item"><img src="img/green-dino.jpg" alt="Fuzzy plush toy of a green dinosaur"><div class="hot-ribbon">Hot!</div></li></a>
+                    <a href="product-details.html"><li class="scroll-box_item"><img src="img/baby-chick.jpg" alt="Crocheted Yellow Baby Chicken"><div class="hot-ribbon">Hot!</div></li>
+                    <a href="product-details.html"><li class="scroll-box_item"><img src="img/rabbit.jpg" alt="Rabbit teddy toy in a spotted dress"></li></a>
+                </ul>
+            </div>
+
+            <section class="scroll-box-container" id="review-scroll-box">
+                <h1>Recent Reviews</h1>
+                <ul>
+                <li class="scroll-box_item">
+                    <h2>Alex</h2>
+                    <img src="https://placehold.co/300x300/png" alt="">
+                    <p>Pellentesque bibendum placerat orci sit amet lobortis. Vivamus at mattis mi, vitae maximus ante. </p>
+                </li>
+                <li class="scroll-box_item">
+                    <h2>Melissa</h2>
+                    <img src="https://placehold.co/300x300/png" alt="">
+                    <p>Cras luctus urna vitae porta finibus. Vestibulum sed erat in nulla vulputate fermentum eget et dui. Aliquam vitae tempus urna. </p>
+                </li>
+                <li class="scroll-box_item">
+                    <h2>Jack</h2>
+                    <img src="https://placehold.co/300x300/png" alt="">
+                    <p>Nunc libero massa, ullamcorper eu interdum eu, tempus et lectus. Nullam imperdiet sapien sed fringilla varius. Fusce auctor, purus in varius dictum, diam justo tincidunt erat, eu ullamcorper lectus purus ac orci.</p>
+                </li>
+                <li class="scroll-box_item">
+                    <h2>Jeremy</h2>
+                    <img src="https://placehold.co/300x300/png" alt="">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget risus ut leo faucibus iaculis eget tincidunt purus. Donec pharetra, diam ac iaculis sodales, nunc ex venenatis ante.</p>
+                </li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="footer">                     <!-- Footer -->
+            <div class="footer_copyright">Example Business Ltd. 2024</div>
+            <ul class="footer_socials">
+                <li><a href="https://pinterest.co.uk"><img src="svg/pinterest-p.svg" alt="Pinterest"></a></li>
+                <li><a href="https://www.instagram.com"><img src="svg/instagram.svg" alt="Instagram"></a></li>
+                <li><a href="https://www.facebook.com"><img src="svg/facebook.svg" alt="Facebook"></a></li>
+                <li><a href="https://bsky.app"><img src="svg/bluesky.svg" alt="Bluesky"></a></li>
+                <li><a href="http://mail.google.com/mail"><img src="svg/envelope.svg" alt="Email"></a></li>
+            </ul>
+        </footer>
+
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
