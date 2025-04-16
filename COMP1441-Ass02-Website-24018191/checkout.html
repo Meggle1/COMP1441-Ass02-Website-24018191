@@ -18,6 +18,10 @@
             </div>
             </a>
                 
+            <div class="options">
+                <button id="themeButton" aria-label="Toggle page theme" data-theme-toggle><img id="themeImg" src="svg/light-theme.svg"></button>
+            </div>
+
             <div class="searchbar" role="Search Bar">
                 <form action="#" method="get">
                     <input type="text" class="searchInput" placeholder="Search products.." aria-label="Search Products input">
@@ -36,23 +40,24 @@
         </nav>
         
         <main class="main-container">                <!-- Main -->
-            <form class="checkout-form" id="checkoutform" action="#" method="post"> <!-- Customer Checkout Form -->
+            <form class="checkout-form" id="form" action="#" method="post" autocomplete="off"> <!-- Customer Checkout Form -->
                 <div class="checkoutgrid-container">
                         <section class="customerDetails-wrapper"> <!-- Customer Details -->
                             <h2>Checkout</h2>
                             <section class="customerDetails">
                                 <div class="field-group">
-                                    <input type="text" name="name-field" id="checkout-name-field" placeholder="Name" aria-label="Name input" required>
+                                    <input type="text" name="forename-field" id="forenameInput" placeholder="Forename" aria-label="Forename input">
+                                    <input type="text" name="surname-field" id="surnameInput" placeholder="Surname" aria-label="Surname input">
                                 </div>
                                 <div class="field-group">
-                                    <input type="text" name="email-field" id="checkout-email-field" placeholder="Email" aria-label="Email input" required>
-                                    <input type="text" name="tel-field" id="checkout-telnum-field" placeholder="Phone Number" aria-label="Phone Number input" required>
-                                    <input type="text" name="country-field" id="checkout-country-field" placeholder="Country" aria-label="Country input" required>
+                                    <input type="text" name="email-field" id="emailInput" placeholder="Email" aria-label="Email input">
+                                    <input type="text" name="tel-field" id="teleInput" placeholder="Phone Number" aria-label="Phone Number input">
+                                    <input type="text" name="country-field" id="countryInput" placeholder="Country" aria-label="Country input">
                                 </div>
                                 <div class="field-group">
-                                    <input type="text" name="addr1-field" id="checkout-address1-field" placeholder="Address 1" aria-label="First line of address input" required>
-                                    <input type="text" name="addr2-field" id="checkout-address2-field" placeholder="Address 2" aria-label="Second line of address input">
-                                    <input type="text" name="addr3-field" id="checkout-address3-field" placeholder="Address 3" aria-label="Third line of address input">
+                                    <input type="text" name="addr1-field" id="address1-field" placeholder="Address 1" aria-label="First line of address input">
+                                    <input type="text" name="addr2-field" id="address2-field" placeholder="Address 2" aria-label="Second line of address input">
+                                    <input type="text" name="addr3-field" id="address3-field" placeholder="Address 3" aria-label="Third line of address input">
                                 </div>
                             </section>
                         </section>
@@ -93,13 +98,15 @@
                             <strong class="cart-total" id="cart-sum-total">Total: £63.95</strong>
                         </aside>
 
-                
+                        
 
-                    <button type="submit" class="paymentButton" form="checkoutform">Pay Now</button> <!-- Uses form ID & form attribute to submit -->
+                    <button type="submit" class="paymentButton" form="form" id="submitOrder">Pay Now</button> <!-- Uses form ID & form attribute to submit -->
                 </div>
             </form>
-
+            
         </main>
+
+        <div id="toastPopup">Error</div>
 
         <footer class="footer">                     <!-- Footer -->
             <div class="footer_copyright">Example Business Ltd. 2024</div>

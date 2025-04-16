@@ -1,5 +1,5 @@
-/*
-    THEME TOGGLE FEATURE
+/* 
+    ----- THEME TOGGLE FEATURE -----
 */
 
 // Calculates the current setting by comparing them to 
@@ -48,8 +48,99 @@ themeButton.addEventListener("click", (event) => {
     updateHTMLElementTheme({ theme: newTheme });
   
     currentThemeSetting = newTheme; // Sets theme setting to the theme thats been switched to
-}); 
+});
 
-/*
-    NEXT FEATURE
+/* 
+    ----- PRODUCT CAROUSEL -----
 */
+
+
+
+
+/* 
+    ----- TOAST POPUP -----
+*/
+
+// Get the snackbar DIV
+var toast = document.getElementById("toastPopup");
+
+function toastFunction(text) {
+    toast.innerHTML = `${text}`;
+    // Add the "show" class to DIV
+    toast.className = "visible";
+    
+    // remove the visible class from DIV after 3.5 seconds
+    setTimeout(function(){ toast.className = toast.className.replace("visible", ""); }, 3500);
+};
+
+/* 
+    ----- FORM VALIDATION -----
+*/
+
+const form = document.querySelector("#form");
+
+const forenameInput = document.querySelector("#forenameInput");
+const surnameInput = document.querySelector("#surnameInput");
+
+const email = document.querySelector("#emailInput");
+const teleInput = document.querySelector("#teleInput");
+const countryInput = document.querySelector("#countryInput");
+
+const address1 = document.querySelector("#address1-field");
+const address2 = document.querySelector("#address2-field");
+const address3 = document.querySelector("#address3-field");
+
+const emailRegex = /[A-Za-z0-9]+@[A-Za-z0-9]+/i;
+const teleRegex = /[0-9]{10,11}/;
+let isValid = true;
+let errors = [];
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  errors = [];
+
+  // Check if any field empty
+  if((forenameInput.value || surnameInput.value || email.value || teleInput.value || countryInput.value || address1.value || address2.value || address3.value)  === '') {
+    errors.push("Please fill in all fields.");
+    showError();
+    return isValid = false;
+  }
+  
+  // Email
+  if(!emailRegex.test(email.value)) {
+    errors.push("This is not a valid email address.");
+    showError();
+    return isValid = false;
+  }
+
+  // Telephone Number
+  if(!teleRegex.test(teleInput.value)) {
+    errors.push("This is not a valid number. \n Must be a UK number between 10 and 11 digits.");
+    showError();
+  }
+
+  // Names must have between 2 and 50 characters.
+  if((forenameInput.value.length || surnameInput.value.length) < 2 || (forenameInput.value.length || surnameInput.value.length) > 50) {
+    errors.push("This is not a valid name. Please try again");
+    showError();
+    return isValid = false;
+  }
+
+  // Submit form
+  if(isValid = true) {
+      toastFunction("Success! Order has been sent.");
+      // Submits using fetchAPI (no need for page reload, and preventDefault overrides submit)
+      fetch(form.action, {
+        method: "post",
+        body: new FormData(form)
+      });
+      console.log("Success");
+  }
+});
+
+function showError(){ // Function to join together errors and pass it to toast function
+  var message = errors.join("<br>");
+  toastFunction(message);
+}
+
+

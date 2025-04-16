@@ -18,6 +18,10 @@
             </div>
             </a>
 
+            <div class="options">
+                <button id="themeButton" aria-label="Toggle page theme" data-theme-toggle><img id="themeImg" src="svg/light-theme.svg"></button>
+            </div>
+
             <div class="searchbar" role="Search Bar">
                 <form action="#" method="get">
                     <input type="text" class="searchInput" placeholder="Search products.." aria-label="Search Products input">
@@ -52,7 +56,7 @@
                         <p>+44 3542 712468</p>
                     </div>
                 </section>
-                    <form action="#" method="post" class="contact-form" id="contact-form"> <!-- Contact Form --> 
+                    <form action="#" method="post" class="contact-form" id="form"> <!-- Contact Form --> 
                         <div class="contact-input-container">
                             <label for="contact-name-field">Name</label>
                             <input type="text" name="contact-name" id="contact-name-field" required>
@@ -74,7 +78,7 @@
                             <textarea name="contact-message" id="contact-message-field" required></textarea>
                         </div>
 
-                        <button type="submit" class="submitButton" form="contact-form">Submit</button> <!-- Uses form ID & form attribute to submit -->
+                        <button type="submit" class="submitButton" form="form">Submit</button> <!-- Uses form ID & form attribute to submit -->
                     </form>
             </div>
         </main>
