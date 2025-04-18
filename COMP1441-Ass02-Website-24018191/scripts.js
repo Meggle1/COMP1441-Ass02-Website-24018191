@@ -51,11 +51,36 @@ themeButton.addEventListener("click", (event) => {
 });
 
 /* 
-    ----- PRODUCT CAROUSEL -----
+    ----- PRODUCT DESCRIPTION ON HOVER -----
 */
 
+// Get array of info-boxes on page
+var infoboxes = document.getElementsByClassName("product-infoBox"); 
 
+// on hover, add visible class to info-box's parent's sibling overlay element
+var hover = function() { 
+  try {
+    var overlay = this.parentElement.nextElementSibling;
+    overlay.classList.add("visible"); 
+  } catch(err) { 
+    // Tells me which product is missing the overlay element if there isnt one :D
+    console.log(`Missing overlay element for product "${this.parentElement.querySelector(".productTitle").innerHTML}"`)
+  }
+}
 
+// remove visible when no longer hovered
+var endHover = function() { 
+  try {
+    var overlay = this.parentElement.nextElementSibling;
+    overlay.classList.remove("visible");
+  } catch(err) { } // Suppress errors to only print on hover off
+}
+
+// iterate through infobox array
+for (var i = 0; i < infoboxes.length; i++) { 
+  infoboxes[i].addEventListener('mouseover', hover, false);
+  infoboxes[i].addEventListener('mouseout', endHover, false);
+}
 
 /* 
     ----- TOAST POPUP -----

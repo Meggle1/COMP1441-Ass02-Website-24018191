@@ -42,6 +42,17 @@
     .productPhoto img {
         width: 20rem; /* For images in rows that aren't full */
     }
+    .productOverlay {
+        ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 88%;
+        }
+        li {
+        font-size: 25px;
+        }
+    }
 }
 
 .page-header {
@@ -59,8 +70,9 @@
 .product-redirect { /* Hides styling given by 'a' tag */
     color: inherit;
     text-decoration: none;
-    background-color: white;
     border: 0.4rem solid white;
+    position: relative;
+    display: grid;
 }
 
 .productSlot {
@@ -80,15 +92,57 @@
     transform: scale(0.96);
 }
 
-.productPhoto img {
-    max-width: 100%;
+.productPhoto {
+    z-index: 0;
+    position: relative;
+    display: flex;
+    img {
+        max-width: 100%;
+    }
 }
 
 .productInfo {
-    align-content: baseline;
-    margin-top: auto;
+    background-color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: relative;
+    height: auto;
+    z-index: 1;
     > h5 {
         font-weight: normal;
     } 
+}
+
+.productOverlay {
+    visibility: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(99, 74, 97, 0.781);
+    color: white;
+    padding: 1rem;
+    ul {
+        list-style-type: none;
+    }
+}
+
+.productOverlay.visible {
+    visibility: visible;
+}
+
+.product-infoBox {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+    height: 2rem;
+    width: 2rem;
+    background-color: white;
+    padding: 0.1rem;
+    display: flex;
+    border-radius: 0.2rem;
+    z-index: 6;
+    img {
+        z-index: 6;
+    }
 }
