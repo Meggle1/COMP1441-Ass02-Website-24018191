@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Clothing Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contact.css">
+    
+</head>
+<body>
+    <div class="gridcontainer">
+        <header class="header">                     <!-- Header -->
+                        
+            <a href="index.html">
+            <div class="logo"> <!-- Logo -->
+                <img src="svg/Logo.svg" alt="Company Logo" class="header-logo">
+            </div>
+            </a>
+
+            <div class="options">
+                <button id="themeButton" aria-label="Toggle page theme" data-theme-toggle><img id="themeImg" src="svg/light-theme.svg"></button>
+            </div>
+
+            <div class="searchbar" role="Search Bar">
+                <form action="#" method="get">
+                    <input type="text" class="searchInput" placeholder="Search products.." aria-label="Search Products input">
+                    <button type="submit" class="searchButton" alt="Search Button"><img src="svg/circle-arrow-right(2).svg" alt="O"></button>
+                </form>
+            </div>
+        </header>
+
+        <nav class="navbar" role="navigation">                        <!-- Navbar -->
+            <ul class="navlist">
+                <li><a href="index.html" alt="Homepage hyperlink" id="first">Home</a></li>
+                <li><a href="products.html" alt="Products page hyperlink">Products</a></li>
+                <li><a href="checkout.html" alt="Checkout page hyperlink">Checkout</a></li>
+                <li><a href="contact.html" alt="Contact page hyperlink" id="last">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main-container">                <!-- Main -->
+            <div class="contactgrid-container">
+                <div class="heading-container">
+                    <h2>Here to help!</h2>
+                </div>
+                
+                <section class="information-container">
+                    <div class="informationText">
+                        <img src="svg/comments-question.svg" alt="Two speech bubbles, one with a question mark">
+                        <p>Leave any queries you have here, <br>and we'll get back to you!</p>
+                    </div>
+                    <div class="teleInfoText">
+                        <img src="svg/phone-arrow-down-left.svg" alt="Landline phone with arrow pointing towards">
+                        <p>Alternatively, give us a call!</p>
+                        <p>+44 3542 712468</p>
+                    </div>
+                </section>
+                    <form action="#" method="post" class="contact-form" id="form"> <!-- Contact Form --> 
+                        <div class="contact-input-container">
+                            <label for="contact-name-field">Name</label>
+                            <input type="text" name="contact-name" id="contact-name-field" required>
+                        </div>
+                        <div class="contact-input-container">
+                            <label for="contact-email-field">Email</label>
+                            <input type="text" name="contact-email" id="contact-email-field" required>
+                        </div>
+                        <div class="form-subject-select">
+                            <label for="contact-subject-type">Subject Type:</label>
+                            <select name="contact-subject-type" id="formSubjectType">
+                                <option name="contact-subject-type" id="feedback" value="Feedback">Feedback</option>
+                                <option name="contact-subject-type" id="order_status" value="Order Status">Order Status</option>
+                                <option name="contact-subject-type" id="collab" value="Collab">Collab</option>
+                            </select>
+                        </div>
+                        <div class="contact-input-container" id="message-container">
+                            <label for="contact-message-field">Message:</label>
+                            <textarea name="contact-message" id="contact-message-field" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submitButton" form="form">Submit</button> <!-- Uses form ID & form attribute to submit -->
+                    </form>
+            </div>
+        </main>
+
+        <footer class="footer">                     <!-- Footer -->
+            <div class="footer_copyright">Example Business Ltd. 2024</div>
+            <ul class="footer_socials">
+                <li><a href="https://pinterest.co.uk"><img src="svg/pinterest-p.svg" alt="Pinterest"></a></li>
+                <li><a href="https://www.instagram.com"><img src="svg/instagram.svg" alt="Instagram"></a></li>
+                <li><a href="https://www.facebook.com"><img src="svg/facebook.svg" alt="Facebook"></a></li>
+                <li><a href="https://bsky.app"><img src="svg/bluesky.svg" alt="Bluesky"></a></li>
+                <li><a href="http://mail.google.com/mail"><img src="svg/envelope.svg" alt="Email"></a></li>
+            </ul>
+        </footer>
+
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
