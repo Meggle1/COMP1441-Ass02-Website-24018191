@@ -405,4 +405,12 @@ input:focus::placeholder {
   /*  */
   #toastPopup.visible {
     visibility: visible;
+}
+
+#submitAnimCanvas {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
   }

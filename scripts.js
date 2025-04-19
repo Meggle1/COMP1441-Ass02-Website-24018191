@@ -16,9 +16,9 @@ function updateButton({ themeButton, isDark }) {
     themeButton.setAttribute("aria-label", newCta);
     // Changes button image based on theme
     if (newCta == "Dark") {
-        themeImg.src = "svg/dark-theme.svg"
+        themeImg.src = "svg/dark-theme.svg";
     } else if (newCta == "Light") {
-        themeImg.src = "svg/light-theme.svg"
+        themeImg.src = "svg/light-theme.svg";
     }
 }
   
@@ -159,6 +159,8 @@ form.addEventListener("submit", (event) => {
         method: "post",
         body: new FormData(form)
       });
+      submitFormAnimation();
+      form.querySelectorAll("input").
       console.log("Success");
   }
 });
@@ -168,4 +170,61 @@ function showError(){ // Function to join together errors and pass it to toast f
   toastFunction(message);
 }
 
+/* 
+    ----- CANVAS ANIMATION ON FORM SUBMIT -----
+*/
 
+function submitFormAnimation() {
+  // Create canvas and append
+  const animCanvas = document.createElement('canvas');
+  animCanvas.id = "submitAnimCanvas"; // Set ID
+  animCanvas.width = 200; // Set width
+  animCanvas.height = 200; // Set height
+  document.body.appendChild(animCanvas); // Append to document
+
+  const xMid = animCanvas.width / 2; // For convenience
+  const yMid = animCanvas.height / 2; 
+
+  const ctx = animCanvas.getContext('2d');
+
+  let drawingX = 0; // Initial X pos of the drawing
+  const drawingSpeed = 1.5; // Speed of the drawing
+
+  function drawShape(x, y) {
+      ctx.beginPath();
+      ctx.moveTo(x, y); // Start at middle
+      ctx.lineTo(x - 40, y - 20); // Stroke to the left and up
+      ctx.lineTo(x - 35, y); // Stroke inwards (little folded bit)
+      ctx.lineTo(x - 40, y + 20); // Stroke out back again
+      ctx.fillStyle = 'whitesmoke';
+      ctx.fill(); // Fill prior to middle line so it doesn't overwrite it
+      ctx.lineTo(x, y); 
+      ctx.lineTo(x - 35, y); // Little middle line :3
+      ctx.stroke();
+  }
+
+  function drawTick() {
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo((xMid + 15), (yMid - 25));
+      ctx.lineTo(xMid - 10, yMid + 15 );
+      ctx.lineTo(xMid - 20, yMid);
+      ctx.stroke();
+  }
+
+  function update() {
+      ctx.clearRect(0, 0, animCanvas.width, animCanvas.height); // Clear canvas
+
+      if (drawingX < (animCanvas.width + (animCanvas.width / 4))) { // While shape is less than 25% out of the canvas
+          drawShape(drawingX, yMid); // Draw shape at specified x and middle of y
+          drawingX += drawingSpeed; // Move the shape to the right
+      } else {
+          drawTick();
+          setTimeout(() => {
+              animCanvas.remove(); // Remove canvas after 0.8s
+          }, 900);
+      }
+      requestAnimationFrame(update); // Continue the animation
+  }
+  update();
+}
