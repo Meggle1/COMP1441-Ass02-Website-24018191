@@ -26,6 +26,11 @@
     .productPhoto img {
         width: 16rem; /* For images in rows that aren't full */
     }
+    .productOverlay {
+        li {
+        font-size: 22px;
+        }
+    }
 }
 
 @media only screen and (min-width: 1024px) { /* Big Screens / PC */
@@ -43,12 +48,6 @@
         width: 20rem; /* For images in rows that aren't full */
     }
     .productOverlay {
-        ul {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        height: 88%;
-        }
         li {
         font-size: 25px;
         }
@@ -115,7 +114,7 @@
 .productOverlay {
     visibility: hidden;
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -123,7 +122,11 @@
     color: white;
     padding: 1rem;
     ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
         list-style-type: none;
+        height: 88%;
     }
 }
 

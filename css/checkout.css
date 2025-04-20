@@ -15,6 +15,10 @@
         "payment";
         row-gap: 1rem;
     }
+
+    .productname {
+        font-weight: bold;
+    }
 }
 
 @media only screen and (min-width: 1024px) { /* Big Screens / PC */
@@ -24,6 +28,10 @@
         "payment payment payment";
         padding: 0 1rem 1rem 1rem; /* Stops scaling hover animation from cropping */
         grid-template-columns: 1.1fr 0.6fr 1.2fr;
+    }
+
+    .productname {
+        font-weight: normal;
     }
 }
 
@@ -113,7 +121,6 @@
         }
         p {
             width: 22%;
-            font-weight: normal;
         }
         input {
           width: 25%;

@@ -22,7 +22,7 @@ function updateButton({ themeButton, isDark }) {
     }
 }
   
-// Utility function to update the theme setting on the html tag
+// Utility funct to update the theme setting on the html tag
 function updateHTMLElementTheme({ theme }) {
     document.querySelector("html").setAttribute("data-theme", theme);
 }

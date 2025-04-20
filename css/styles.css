@@ -40,8 +40,12 @@
         "footer footer footer";
     }
 
-    .header, .navbar, .main-container { /* Adds some margin so it doesnt reach the edge of screen */
+    .header, .navbar{ /* Adds some margin so it doesnt reach the edge of screen */
         margin: 0 1rem 0 1rem;
+    }
+
+    .main-container {
+        margin: 0 0.5rem 0 0.5rem
     }
 
     .footer {
