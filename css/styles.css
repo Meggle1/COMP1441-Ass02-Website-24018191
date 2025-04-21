@@ -391,7 +391,7 @@ input:focus::placeholder {
     border-right: none;
 }
 
-#toastPopup {
+.toastPopup {
     visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
@@ -407,7 +407,7 @@ input:focus::placeholder {
   }
   
   /*  */
-  #toastPopup.visible {
+  .toastPopup.visible {
     visibility: visible;
 }
 

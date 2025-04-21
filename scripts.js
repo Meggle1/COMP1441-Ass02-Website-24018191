@@ -10,8 +10,8 @@ function calcSettingAsThemeString({ localStorageTheme}) {
 }
   
 // Update button image and aria-label.
-function updateButton({ themeButton, isDark }) {
-    const newCta = isDark ? "Dark" : "Light";
+function updateButton({ themeButton, isLight }) {
+    const newCta = isLight ? "Dark" : "Light"; // If isLight is true, assign "Dark", else if isLight is false, assign "Light"
     // Updates aria label based on theme
     themeButton.setAttribute("aria-label", newCta);
     // Changes button image based on theme
@@ -36,7 +36,7 @@ const localStorageTheme = localStorage.getItem("theme");
 let currentThemeSetting = calcSettingAsThemeString({localStorageTheme});
   
 // Update the theme setting and button image based on settings
-updateButton({ themeButton: themeButton, isDark: currentThemeSetting === "dark" });
+updateButton({ themeButton: themeButton, isLight: currentThemeSetting === "dark" });
 updateHTMLElementTheme({ theme: currentThemeSetting });
   
 
@@ -44,7 +44,7 @@ updateHTMLElementTheme({ theme: currentThemeSetting });
 themeButton.addEventListener("click", (event) => {
     const newTheme = currentThemeSetting === "dark" ? "light" : "dark"; // Short-hand if else - If (currentThemeSetting) = dark, then newTheme = light etc.
     localStorage.setItem("theme", newTheme);
-    updateButton({ themeButton: themeButton, isDark: newTheme === "dark" });
+    updateButton({ themeButton: themeButton, isLight: newTheme === "dark" });
     updateHTMLElementTheme({ theme: newTheme });
   
     currentThemeSetting = newTheme; // Sets theme setting to the theme thats been switched to
@@ -60,8 +60,8 @@ var infoboxes = document.getElementsByClassName("product-infoBox");
 // on hover, add visible class to info-box's parent's sibling overlay element
 var hover = function() { 
   try {
-    var overlay = this.parentElement.nextElementSibling;
-    overlay.classList.add("visible"); 
+    var overlay = this.parentElement.nextElementSibling; // Get the overlay element of the product relative to the infoBox
+    overlay.classList.add("visible");  // Add the 'visible' class
   } catch(err) { 
     // Tells me which product is missing the overlay element if there isnt one :D
     console.log(`Missing overlay element for product "${this.parentElement.querySelector(".productTitle").innerHTML}"`)
@@ -86,20 +86,19 @@ for (var i = 0; i < infoboxes.length; i++) {
     ----- TOAST POPUP -----
 */
 
-// Get the snackbar DIV
-var toast = document.getElementById("toastPopup");
-
 function toastFunction(text) {
+    const footerRef = document.querySelector('.footer'); // Make a reference to the footer
+    var toast = document.createElement("div"); // Create the toast element
+    footerRef.before(toast); // Insert toast popup before the footer
+    toast.classList.add('toastPopup'); // Add toastPopup class to it
     toast.innerHTML = `${text}`;
-    // Add the "show" class to DIV
-    toast.className = "visible";
-    
-    // remove the visible class from DIV after 3.5 seconds
-    setTimeout(function(){ toast.className = toast.className.replace("visible", ""); }, 3500);
+    toast.classList.add("visible"); // Add the "show" class to DIV
+    // remove the DIV after 3.5 seconds
+    setTimeout(function(){ toast.remove(); }, 3500);
 };
 
 /* 
-    ----- FORM VALIDATION -----
+    ----- CHECKOUT FORM VALIDATION -----
 */
 
 const form = document.querySelector("#form");
@@ -120,6 +119,7 @@ const teleRegex = /[0-9]{10,11}/;
 let isValid = true;
 let errors = [];
 
+try {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   errors = [];
@@ -164,6 +164,7 @@ form.addEventListener("submit", (event) => {
       console.log("Success");
   }
 });
+} catch(err) {console.log("Error: No element with form class on page.")}
 
 function showError(){ // Function to join together errors and pass it to toast function
   var message = errors.join("<br>");
@@ -228,3 +229,9 @@ function submitFormAnimation() {
   }
   update();
 }
+
+/* 
+    ----- LOAD PRODUCTS FROM JSON -----
+*/
+
+// See products.html, script is in there
