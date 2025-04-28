@@ -234,4 +234,74 @@ function submitFormAnimation() {
     ----- LOAD PRODUCTS FROM JSON -----
 */
 
-// See products.html, script is in there
+let cart = [];
+
+/* Saves clicked product to load in session storage */
+
+var products = document.getElementsByClassName("productSlot");
+
+var myFunction = function() {
+  var productID = this.getAttribute("prodID")
+  sessionStorage.setItem("clickedProduct", `${productID}`);
+};
+
+for (var i = 0; i < products.length; i++) {
+  products[i].addEventListener('click', myFunction, false);
+}
+
+/* Load product info on product-details page */
+
+prodName = document.querySelector("#product-name"); // Get product name header
+prodPrice = document.querySelector("#product-price"); // Get product price header
+prodImgContainer = document.querySelector(".product-photo"); // Get product image container
+prodDescription = document.querySelector(".prod-desc-body");
+productSpecs = document.querySelector("#productSpecForm");
+
+let idToCheck = sessionStorage.getItem("clickedProduct"); // Gets ID of clicked product from session storage
+
+fetch("products.json") // Uses FetchAPI to get products from json
+.then(response => response.json())
+.then(data =>{   
+    const jsonProduct = data.find(p => p.id === idToCheck); // Gets product of ID matching the one in session storage
+    console.log(jsonProduct);
+    prodName.innerHTML = jsonProduct.name; // Sets html product name to json element's name
+    prodPrice.innerHTML = jsonProduct.price; // Sets html price  to json element's price
+    prodImgContainer.querySelector("img").setAttribute("src", `${jsonProduct.image}`); // Sets the container's child 'img' src to json element's image value
+    prodDescription.innerHTML = jsonProduct.description;
+    if (jsonProduct.dropdown !== null) { // If the product has additional options, add the dropdown
+      var prodOptions = `
+                      <label for="prod-variation-type">Subject Type:</label>
+                      <select name="prod-variation-type" id="formSubjectType">
+                          <option name="prod-variation-type" id="prodvar_1" value="Option 1">${jsonProduct.dropdown[0]}</option>
+                          <option name="prod-variation-type" id="prodvar_2" value="Option 2">${jsonProduct.dropdown[1]}</option>
+                      </select>
+                    `;
+    }
+    productSpecs.insertAdjacentHTML("afterbegin", prodOptions); // Inserts the dropdown box html
+  });
+
+
+
+/* Load products in checkout page */
+fetch("products.json")
+.then(response => response.json())
+.then(data =>{
+
+    let html = "";
+    data.forEach(product =>{
+        html += `
+            <li class="cart-item-entry">
+                <img src="${product.image}">
+                <p class="productname">${product.name}</p>
+                <input type="number" value="1" min="0" aria-label="Current quantity of item in cart">
+                <span>${product.price}</span>
+            </div>
+        `;
+    });
+    try {
+      document.getElementById("cart-list").innerHTML = html;
+    }
+    catch(err) {
+      console.log(err + " | Page is likely not 'checkout'")
+    }
+});

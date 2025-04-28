@@ -100,7 +100,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     overflow-y: auto;
     font-size: larger;
-    ul {
+    #cart-list {
         padding-right: 1rem;
         display: flex;
         gap: 1rem;

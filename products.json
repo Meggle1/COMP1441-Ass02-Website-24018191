@@ -5,7 +5,8 @@
     "height": "00cm",  
     "weight": "000g",
     "colour": "Yellow", 
-    "image": "img/baby-chick.jpg"},
+    "image": "img/baby-chick.jpg",
+    "description": "Veritatis ut vel laborum qui possimus veritatis minus. Ducimus rerum at ea rerum illum eum ut. Nihil debitis fuga nihil animi harum et omnis facere. Eligendi dolor aut incidunt eligendi quis."},
 
     {"id": "2",
     "name": "Ted the Tiger", 
@@ -13,7 +14,8 @@
     "height": "00cm",  
     "weight": "000g",
     "colour": "Orange", 
-    "image": "img/crochet-tiger.jpg"},
+    "image": "img/crochet-tiger.jpg",
+    "description": "Nulla quo fugit nihil et est ut. Eveniet laboriosam porro tenetur. A soluta et est fuga recusandae porro. Sit sint eius laborum sit et et delectus."},
 
     {"id": "3",
     "name": "Barny the Owl", 
@@ -21,7 +23,8 @@
     "height": "00cm",  
     "weight": "000g",
     "colour": "Grey / White", 
-    "image": "img/cuddly-owl.jpg"},
+    "image": "img/cuddly-owl.jpg",
+    "description": "Eveniet iste molestiae corporis et aut. Qui aut aut deleniti nihil aut consequatur saepe facilis."},
 
     {"id": "4",
     "name": "Pumpk-itty", 
@@ -29,7 +32,9 @@
     "height": "00cm",  
     "weight": "000g",
     "colour": "White / Orange", 
-    "image": "img/pumpkinKitty.jpg"},
+    "image": "img/pumpkinKitty.jpg",
+    "description": "Pumpk-itty is the cutest cuddly companion to get you into the halloween spirit!<br> <br>At <b>8 inches tall</b>, this kitty is small enough to come with you on your travels!",
+    "dropdown": ["With Bow", "No Bow"]},
 
     {"id": "5",
     "name": "Doris the Dino", 
@@ -37,7 +42,8 @@
     "height": "00cm",  
     "weight": "000g",
     "colour": "Green", 
-    "image": "img/green-dino.jpg"},
+    "image": "img/green-dino.jpg",
+    "description": "Excepturi odit doloribus odio ipsa aliquam deserunt totam. Ipsam cupiditate dignissimos vel dicta quod. Enim et delectus molestiae occaecati et culpa impedit."},
 
     {"id": "6",
     "name": "Gimly the Giraffe", 
@@ -45,15 +51,17 @@
     "height": "00cm",  
     "weight": "000g",
     "colour": "Yellow", 
-    "image": "img/pexels-giraffe.jpg"},
+    "image": "img/pexels-giraffe.jpg",
+    "description": "Dolorum harum quia dolore saepe sint et. Quas voluptatem itaque dolor aliquam ipsa dolorem perferendis quae."},
 
     {"id": "7",
-    "name": "Ted the Tiger", 
+    "name": "Pilot Pete", 
     "price": "£12.99", 
     "height": "00cm",  
     "weight": "000g",
     "colour": "Brown / White", 
-    "image": "img/pilot-penguin.jpg"},
+    "image": "img/pilot-penguin.jpg",
+    "description": "Facilis et nesciunt qui hic recusandae harum. Quia aut dignissimos neque quia quia."},
 
     {"id": "8",
     "name": "Theodore the Tiger", 
@@ -61,7 +69,8 @@
     "height": "00cm",  
     "weight": "000g",
     "colour": "Orange / White", 
-    "image": "img/dungaree-tiger.jpg"},
+    "image": "img/dungaree-tiger.jpg",
+    "description": "Dolorem vero possimus qui recusandae repudiandae possimus qui vero."},
 
     {"id": "9",
     "name": "Rosy the Rabbit", 
@@ -69,7 +78,8 @@
     "height": "00cm", 
     "weight": "000g",
     "colour": "White / Polka Dots", 
-    "image": "img/rabbit.jpg"},
+    "image": "img/rabbit.jpg",
+    "description": "Eius saepe sit facere amet hic animi facilis. Qui error aut temporibus."},
 
     {"id": "10",
     "name": "Gerome the Giraffe", 
@@ -77,5 +87,6 @@
     "height": "00cm",  
     "weight": "000g",
     "colour": "Blue / Yellow / Green", 
-    "image": "img/colourful-giraffe.jpg"}
+    "image": "img/colourful-giraffe.jpg",
+    "description": "Eius quis sit et non deserunt veritatis exercitationem. Doloribus facilis earum sed."}
 ]

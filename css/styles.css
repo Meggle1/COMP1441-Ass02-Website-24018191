@@ -391,6 +391,8 @@ input:focus::placeholder {
     border-right: none;
 }
 
+/* Small Toast Popup */
+
 .toastPopup {
     visibility: hidden;
     min-width: 250px;
@@ -404,10 +406,9 @@ input:focus::placeholder {
     left: 50%;
     bottom: 30px;
     font-size: 17px;
-  }
+}
   
-  /*  */
-  .toastPopup.visible {
+.toastPopup.visible {
     visibility: visible;
 }
 
@@ -417,4 +418,4 @@ input:focus::placeholder {
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
-  }
+}
