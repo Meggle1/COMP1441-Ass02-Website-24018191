@@ -263,12 +263,11 @@ fetch("products.json") // Uses FetchAPI to get products from json
 .then(response => response.json())
 .then(data =>{   
     const jsonProduct = data.find(p => p.id === idToCheck); // Gets product of ID matching the one in session storage
-    console.log(jsonProduct);
     prodName.innerHTML = jsonProduct.name; // Sets html product name to json element's name
     prodPrice.innerHTML = jsonProduct.price; // Sets html price  to json element's price
     prodImgContainer.querySelector("img").setAttribute("src", `${jsonProduct.image}`); // Sets the container's child 'img' src to json element's image value
     prodDescription.innerHTML = jsonProduct.description;
-    if (jsonProduct.dropdown !== null) { // If the product has additional options, add the dropdown
+    if (jsonProduct.dropdown != undefined) { // If the product has additional options, add the dropdown
       var prodOptions = `
                       <label for="prod-variation-type">Subject Type:</label>
                       <select name="prod-variation-type" id="formSubjectType">
@@ -276,8 +275,9 @@ fetch("products.json") // Uses FetchAPI to get products from json
                           <option name="prod-variation-type" id="prodvar_2" value="Option 2">${jsonProduct.dropdown[1]}</option>
                       </select>
                     `;
-    }
     productSpecs.insertAdjacentHTML("afterbegin", prodOptions); // Inserts the dropdown box html
+    }
+
   });
 
 
