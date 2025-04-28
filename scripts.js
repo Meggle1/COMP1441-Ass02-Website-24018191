@@ -240,47 +240,58 @@ let cart = [];
 
 var products = document.getElementsByClassName("productSlot");
 
-var myFunction = function() {
-  var productID = this.getAttribute("prodID")
-  sessionStorage.setItem("clickedProduct", `${productID}`);
+var myFunction = function(e) { // Function allows for products open in new tab to be correctly loaded
+  if (e.button == 0 || e.button == 1) { // Checks if left clicked or middle clicked
+    var productID = this.getAttribute("prodID")
+    localStorage.setItem("clickedProduct", `${productID}`); // Sets clicked product in local storage to maintain across sessions
+  }
 };
 
 for (var i = 0; i < products.length; i++) {
-  products[i].addEventListener('click', myFunction, false);
+  products[i].addEventListener("mousedown", myFunction, false);
 }
 
 /* Load product info on product-details page */
+if (document.URL.includes("product-details.html")) { // Only executes code on product-details page
+  prodName = document.querySelector("#product-name"); // Get product name header
+  prodPrice = document.querySelector("#product-price"); // Get product price header
+  prodImgContainer = document.querySelector(".product-photo"); // Get product image container
+  prodDescription = document.querySelector(".prod-desc-body");
+  productSpecs = document.querySelector("#productSpecForm");
 
-prodName = document.querySelector("#product-name"); // Get product name header
-prodPrice = document.querySelector("#product-price"); // Get product price header
-prodImgContainer = document.querySelector(".product-photo"); // Get product image container
-prodDescription = document.querySelector(".prod-desc-body");
-productSpecs = document.querySelector("#productSpecForm");
+  let idToCheck = localStorage.getItem("clickedProduct"); // Gets ID of clicked product from local storage
 
-let idToCheck = sessionStorage.getItem("clickedProduct"); // Gets ID of clicked product from session storage
+  fetch("products.json") // Uses FetchAPI to get products from json
+  .then(response => response.json())
+  .then(data =>{   
+      try {
+        const jsonProduct = data.find(p => p.id === idToCheck); // Gets product of ID matching the one in local storage
+        prodName.innerHTML = jsonProduct.name; // Sets html product name to json element's name
+        prodPrice.innerHTML = jsonProduct.price; // Sets html price  to json element's price
+        prodImgContainer.querySelector("img").setAttribute("src", `${jsonProduct.image}`); // Sets the container's child 'img' src to json element's image value
+        prodDescription.innerHTML = jsonProduct.description;
+        
+        if (jsonProduct.dropdown != undefined) { // If the product has additional options, add the dropdown
+          var prodOptions = `
+                          <label for="prod-variation-type">Subject Type:</label>
+                          <select name="prod-variation-type" id="formSubjectType">
+                              <option name="prod-variation-type" id="prodvar_1" value="Option 1">${jsonProduct.dropdown[0]}</option>
+                              <option name="prod-variation-type" id="prodvar_2" value="Option 2">${jsonProduct.dropdown[1]}</option>
+                          </select>
+                        `;
+          productSpecs.insertAdjacentHTML("afterbegin", prodOptions); // Inserts the dropdown box html
+        };
+      } catch(err) {
+        window.location.href = "./products.html";
+      };
+  });
+  
+  addToCart = document.querySelector(".addToCart-button"); // Gets add to cart button
 
-fetch("products.json") // Uses FetchAPI to get products from json
-.then(response => response.json())
-.then(data =>{   
-    const jsonProduct = data.find(p => p.id === idToCheck); // Gets product of ID matching the one in session storage
-    prodName.innerHTML = jsonProduct.name; // Sets html product name to json element's name
-    prodPrice.innerHTML = jsonProduct.price; // Sets html price  to json element's price
-    prodImgContainer.querySelector("img").setAttribute("src", `${jsonProduct.image}`); // Sets the container's child 'img' src to json element's image value
-    prodDescription.innerHTML = jsonProduct.description;
-    if (jsonProduct.dropdown != undefined) { // If the product has additional options, add the dropdown
-      var prodOptions = `
-                      <label for="prod-variation-type">Subject Type:</label>
-                      <select name="prod-variation-type" id="formSubjectType">
-                          <option name="prod-variation-type" id="prodvar_1" value="Option 1">${jsonProduct.dropdown[0]}</option>
-                          <option name="prod-variation-type" id="prodvar_2" value="Option 2">${jsonProduct.dropdown[1]}</option>
-                      </select>
-                    `;
-    productSpecs.insertAdjacentHTML("afterbegin", prodOptions); // Inserts the dropdown box html
-    }
+  addToCart.addEventListener("click", () => {
 
   });
-
-
+}
 
 /* Load products in checkout page */
 fetch("products.json")
@@ -302,6 +313,6 @@ fetch("products.json")
       document.getElementById("cart-list").innerHTML = html;
     }
     catch(err) {
-      console.log(err + " | Page is likely not 'checkout'")
+      console.log(err + " | Page is likely not 'checkout'") // Error to print if no cart on page
     }
 });
