@@ -303,10 +303,13 @@ if (document.URL.includes("product-details.html")) { // Only executes code on pr
 }
 
 /* Load products in checkout page */
+
+const cartTotal = document.querySelector("#cart-sum-total");
+
 fetch("products.json")
 .then(response => response.json())
 .then(data =>{
-
+    var itemCosts = [];
     let html = "";
     data.forEach(product =>{
         html += `
@@ -314,9 +317,10 @@ fetch("products.json")
                 <img src="${product.image}">
                 <p class="productname">${product.name}</p>
                 <input type="number" value="1" min="0" aria-label="Current quantity of item in cart">
-                <span>${product.price}</span>
+                <span class="item-cost">${product.price}</span>
             </div>
         `;
+        itemCosts.push(`${product.price}`);
     });
     try {
       document.getElementById("cart-list").innerHTML = html;
@@ -324,4 +328,11 @@ fetch("products.json")
     catch(err) {
       console.log(err + " | Page is likely not 'checkout'") // Error to print if no cart on page
     }
+    // Calculate the total cost
+    const cleanedCost = itemCosts
+    .map(cost => parseFloat(cost.replace("£", ""))) // Remove £ and make a number using parsefloat
+    .reduce((sum, current) => sum + current, 0); // Add together the costs
+
+
+    cartTotal.innerHTML = `Total: £${cleanedCost.toFixed(2)}`; // Change cart-total html to display price
 });

@@ -10,12 +10,16 @@
 [data-theme="dark"] {
     input[type="number"], input[type="text"] {
         color: white;
-        background-color: rgb(173, 173, 173);
+        background-color: rgb(128, 117, 125);
     }
     .customerDetails {
         input[type="text"] {
-            box-shadow: 0 0 15px #886369;
+            box-shadow: 0 0 15px #62343b;
         }
+    }
+    .paymentButton {
+        color: rgb(132, 57, 174);
+        background-color: #d5a2cd;
     }
 }
 

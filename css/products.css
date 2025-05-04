@@ -7,6 +7,22 @@
 #ba9ccc - Purple
 */
 
+[data-theme="dark"] {
+    .product-redirect {
+        border-color: #574158;
+    }
+    .productInfo {
+        background-color: #3e293c;
+        .product-infoBox {
+            background-color: #ddd;
+        }
+    }
+    .productSlot {
+        background-color: #8f5781;
+        border-color: #46394D;
+    }
+}
+
 * { /* Removes auto-padding and margin */
     margin: 0;
     padding: 0px;
