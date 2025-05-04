@@ -160,7 +160,6 @@ form.addEventListener("submit", (event) => {
         body: new FormData(form)
       });
       submitFormAnimation();
-      form.querySelectorAll("input").
       console.log("Success");
   }
 });
@@ -213,8 +212,14 @@ function submitFormAnimation() {
       ctx.stroke();
   }
 
-  function update() {
+  function updateShape() {
       ctx.clearRect(0, 0, animCanvas.width, animCanvas.height); // Clear canvas
+      if (localStorageTheme == "dark" ) {
+        ctx.fillStyle = "rgb(160, 160, 160)";
+      } else {
+        ctx.fillStyle = "white";
+      }
+      ctx.fillRect(0,0,animCanvas.width,animCanvas.height);
 
       if (drawingX < (animCanvas.width + (animCanvas.width / 4))) { // While shape is less than 25% out of the canvas
           drawShape(drawingX, yMid); // Draw shape at specified x and middle of y
@@ -225,9 +230,9 @@ function submitFormAnimation() {
               animCanvas.remove(); // Remove canvas after 0.8s
           }, 900);
       }
-      requestAnimationFrame(update); // Continue the animation
+      requestAnimationFrame(updateShape); // Continue the animation
   }
-  update();
+  updateShape();
 }
 
 /* 
@@ -286,11 +291,15 @@ if (document.URL.includes("product-details.html")) { // Only executes code on pr
       };
   });
   
-  addToCart = document.querySelector(".addToCart-button"); // Gets add to cart button
+  addToCart = document.forms["productSpecForm"]; // Gets add to cart form
 
-  addToCart.addEventListener("click", () => {
+  addToCart.addEventListener("submit", getValues);
 
-  });
+  function getValues(e) {
+    e.preventDefault();
+
+    let data = {}
+  }
 }
 
 /* Load products in checkout page */

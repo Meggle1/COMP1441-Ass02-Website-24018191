@@ -9,10 +9,17 @@
 
 [data-theme="light"] {
     background-color: white;
+    .footer_socials {
+        background-color: whitesmoke;
+    }
 }
 
 [data-theme="dark"] {
-    background-color: grey;
+    background-color: rgb(141, 141, 141);
+    color: whitesmoke;
+    .footer_socials {
+        background-color: rgb(199, 199, 199);
+    }
 }
 
 #themeButton {
@@ -369,7 +376,6 @@ input:focus::placeholder {
 .footer_socials {
     height: 5rem;
     margin-top: 1.5rem;
-    background-color: whitesmoke;
     padding: 0.2rem;
     align-content: center;
     li {

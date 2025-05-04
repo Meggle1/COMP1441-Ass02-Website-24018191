@@ -7,6 +7,18 @@
 #ba9ccc - Purple
 */
 
+[data-theme="dark"] {
+    input[type="number"], input[type="text"] {
+        color: white;
+        background-color: rgb(173, 173, 173);
+    }
+    .customerDetails {
+        input[type="text"] {
+            box-shadow: 0 0 15px #886369;
+        }
+    }
+}
+
 @media only screen and (max-width: 1024px) { /* Smaller Screens */
     .checkoutgrid-container {
         grid-template-areas: 
