@@ -219,9 +219,9 @@ function submitFormAnimation() {
       } else {
         ctx.fillStyle = "white";
       }
-      ctx.fillRect(0,0,animCanvas.width,animCanvas.height);
+      ctx.fillRect(0,0,animCanvas.width,animCanvas.height); // Add background depending on theme
 
-      if (drawingX < (animCanvas.width + (animCanvas.width / 4))) { // While shape is less than 25% out of the canvas
+      if (drawingX < (animCanvas.width + (animCanvas.width / 4))) { // While shape <25% out of the canvas
           drawShape(drawingX, yMid); // Draw shape at specified x and middle of y
           drawingX += drawingSpeed; // Move the shape to the right
       } else {
@@ -230,7 +230,7 @@ function submitFormAnimation() {
               animCanvas.remove(); // Remove canvas after 0.8s
           }, 900);
       }
-      requestAnimationFrame(updateShape); // Continue the animation
+      requestAnimationFrame(updateShape); // Draws on each call
   }
   updateShape();
 }
