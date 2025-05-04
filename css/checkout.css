@@ -12,6 +12,9 @@
         color: white;
         background-color: rgb(128, 117, 125);
     }
+    .customerDetails-wrapper > h2{
+        color: lightgrey;
+    }
     .customerDetails {
         input[type="text"] {
             box-shadow: 0 0 15px #62343b;

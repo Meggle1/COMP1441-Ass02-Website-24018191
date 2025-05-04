@@ -15,10 +15,16 @@
 }
 
 [data-theme="dark"] {
-    background-color: rgb(133, 117, 139);
+    background-color: rgb(110, 78, 111);
     color: whitesmoke;
-    .footer_socials {
-        background-color: rgb(199, 199, 199);
+    .footer {
+        background-color: #8C6083;
+        .footer_socials {
+            background-color: rgb(199, 199, 199);
+        }
+        .footer_copyright {
+            color: black;
+        }
     }
 }
 
