@@ -8,10 +8,13 @@
 */
 
 [data-theme="dark"] {
-    input[type="number"], input[type="text"] {
-        color: white;
-        background-color: rgb(128, 117, 125);
+    .main-container {
+        input[type="number"], input[type="text"] {
+            color: white;
+            background-color: rgb(128, 117, 125);
+        }
     }
+
     .customerDetails-wrapper > h2{
         color: lightgrey;
     }

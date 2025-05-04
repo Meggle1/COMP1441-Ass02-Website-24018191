@@ -17,6 +17,9 @@
 [data-theme="dark"] {
     background-color: rgb(110, 78, 111);
     color: whitesmoke;
+    .navbar {
+        background-color: #8C6083;
+    }
     .footer {
         background-color: #8C6083;
         .footer_socials {

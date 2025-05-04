@@ -7,6 +7,20 @@
 #ba9ccc - Purple
 */
 
+[data-theme="dark"] {
+    #contact-message-field {
+        background-color:grey;
+    }
+    .contact-input-container {
+        > *{
+            background-color: grey;
+        }
+        label {
+            background-color: grey !important;
+        }
+    }
+}
+
 @media only screen and (max-width: 1024px) { /* Smaller Screens */
     .contactgrid-container {
         grid-template-areas: 
