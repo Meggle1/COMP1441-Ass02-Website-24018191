@@ -332,7 +332,5 @@ fetch("products.json")
     const cleanedCost = itemCosts
     .map(cost => parseFloat(cost.replace("£", ""))) // Remove £ and make a number using parsefloat
     .reduce((sum, current) => sum + current, 0); // Add together the costs
-
-
     cartTotal.innerHTML = `Total: £${cleanedCost.toFixed(2)}`; // Change cart-total html to display price
 });

@@ -26,6 +26,13 @@
             color: black;
         }
     }
+    .searchInput {
+        border-color: #2B1E1F;
+    }
+    .searchButton {
+        border-color: #2B1E1F;
+        background-color: #E4E4E4;
+    }
 }
 
 #themeButton {
