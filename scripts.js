@@ -86,7 +86,10 @@ for (var i = 0; i < infoboxes.length; i++) {
     ----- TOAST POPUP -----
 */
 
-function toastFunction(text) {
+function toastFunction(text, clearToasts) {
+    // Clears existing toast if asked to
+    if ((clearToasts == true) && (document.querySelector(".toastPopup") != null)) { document.querySelector(".toastPopup").remove(); }
+
     const footerRef = document.querySelector('.footer'); // Make a reference to the footer
     var toast = document.createElement("div"); // Create the toast element
     footerRef.before(toast); // Insert toast popup before the footer
@@ -122,37 +125,16 @@ let errors = [];
 try {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  isValid = true;
   errors = [];
 
-  // Check if any field empty
-  if((forenameInput.value || surnameInput.value || email.value || teleInput.value || countryInput.value || address1.value || address2.value || address3.value)  === '') {
-    errors.push("Please fill in all fields.");
-    showError();
-    return isValid = false;
-  }
-  
-  // Email
-  if(!emailRegex.test(email.value)) {
-    errors.push("This is not a valid email address.");
-    showError();
-    return isValid = false;
-  }
-
-  // Telephone Number
-  if(!teleRegex.test(teleInput.value)) {
-    errors.push("This is not a valid number. \n Must be a UK number between 10 and 11 digits.");
-    showError();
-  }
-
-  // Names must have between 2 and 50 characters.
-  if((forenameInput.value.length || surnameInput.value.length) < 2 || (forenameInput.value.length || surnameInput.value.length) > 50) {
-    errors.push("This is not a valid name. Please try again");
-    showError();
-    return isValid = false;
-  }
+  emptyFieldCheck()
+  checkName();
+  emailCheck();
+  teleNumCheck();
 
   // Submit form
-  if(isValid = true) {
+  if(isValid == true) {
       toastFunction("Success! Order has been sent.");
       // Submits using fetchAPI (no need for page reload, and preventDefault overrides submit)
       fetch(form.action, {
@@ -165,11 +147,62 @@ form.addEventListener("submit", (event) => {
 });
 } catch(err) {console.log("Error: No element with form class on page.")}
 
-function showError(){ // Function to join together errors and pass it to toast function
+/* Input Box check functions */
+
+// Check if any field empty
+function emptyFieldCheck() {
+  if((forenameInput.value || surnameInput.value || email.value || teleInput.value || countryInput.value || address1.value || address2.value || address3.value)  === '') {
+    errors.push("Please fill in all fields.");
+    showError();
+    return isValid = false;
+  }
+}
+// Email
+function emailCheck() {
+  if(!emailRegex.test(email.value)) {
+    errors.push("This is not a valid email address.");
+    showError();
+    return isValid = false;
+  }
+}
+// Telephone Number
+function teleNumCheck() {
+  if(!teleRegex.test(teleInput.value)) {
+    errors.push("This is not a valid number. \n Must be a UK number between 10 and 11 digits.");
+    showError();
+    return isValid = false;
+  }
+}
+// Fore and Surnames - Names must have between 2 and 50 characters.
+function checkName() {
+  if((forenameInput.value.length || surnameInput.value.length) < 2 || (forenameInput.value.length || surnameInput.value.length) > 50) {
+    errors.push("This is not a valid name. Please try again");
+    showError();
+    return isValid = false;
+  }
+}
+// Display errors in toast popup
+function showError(clearErrors){ // Function to join together errors and pass it to toast function
   var message = errors.join("<br>");
-  toastFunction(message);
+  toastFunction(message, true);
 }
 
+form.querySelectorAll("input[type='text']").forEach(input => {
+  input.addEventListener("blur", () => {
+    if (input.id == "forenameInput" || input.id == "surnameInput") {
+      checkName();
+      errors = [];
+    }
+    else if (input.id == "teleInput") {
+      teleNumCheck();
+      errors = [];
+    }
+    else if (input.id == "emailInput") {
+      emailCheck();
+      errors = [];
+    }
+  });
+});
 /* 
     ----- CANVAS ANIMATION ON FORM SUBMIT -----
 */

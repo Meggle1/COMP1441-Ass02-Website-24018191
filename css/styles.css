@@ -418,7 +418,6 @@ input:focus::placeholder {
 .toastPopup {
     visibility: hidden;
     min-width: 250px;
-    margin-left: -125px;
     background-color: #333;
     color: #fff;
     text-align: center;
@@ -428,6 +427,7 @@ input:focus::placeholder {
     left: 50%;
     bottom: 30px;
     font-size: 17px;
+    transform: translate(-50%, -50%)
 }
   
 .toastPopup.visible {
