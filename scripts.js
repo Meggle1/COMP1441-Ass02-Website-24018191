@@ -89,7 +89,7 @@ for (var i = 0; i < infoboxes.length; i++) {
 function toastFunction(text, clearToasts) {
     // Clears existing toast if asked to
     if ((clearToasts == true) && (document.querySelector(".toastPopup") != null)) { document.querySelector(".toastPopup").remove(); }
-
+  
     const footerRef = document.querySelector('.footer'); // Make a reference to the footer
     var toast = document.createElement("div"); // Create the toast element
     footerRef.before(toast); // Insert toast popup before the footer
@@ -187,11 +187,11 @@ function showError(clearErrors){ // Function to join together errors and pass it
   toastFunction(message, true);
 }
 
-form.querySelectorAll("input[type='text']").forEach(input => {
-  input.addEventListener("blur", () => {
-    if (input.id == "forenameInput" || input.id == "surnameInput") {
-      checkName();
-      errors = [];
+form.querySelectorAll("input[type='text']").forEach(input => { // Get all input boxes in form
+  input.addEventListener("blur", () => { // Add event listener for when deselected
+    if (input.id == "forenameInput" || input.id == "surnameInput") { // Check if id's match
+      checkName(); // Call matching check function
+      errors = []; // Clear error list
     }
     else if (input.id == "teleInput") {
       teleNumCheck();
@@ -203,6 +203,7 @@ form.querySelectorAll("input[type='text']").forEach(input => {
     }
   });
 });
+
 /* 
     ----- CANVAS ANIMATION ON FORM SUBMIT -----
 */
