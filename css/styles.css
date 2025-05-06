@@ -36,6 +36,13 @@
         border-color: #2B1E1F;
         background-color: #E4E4E4;
     }
+    .scroll-box-container#review-scroll-box {
+        .scroll-box_item, h1 {
+            color: whitesmoke;
+            background-color: #6285a5;
+            border-color: #3d5c79;
+        }
+    }
 }
 
 #themeButton {
@@ -332,7 +339,7 @@ input:focus::placeholder {
         background-color: #A2D2FF;
         margin-bottom: 1rem;
     }
-    li {
+    .scroll-box_item {
     background-color: #A2D2FF;
     border: 0.4rem solid #BDE0FE;
     flex-direction: column;
