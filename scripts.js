@@ -361,10 +361,8 @@ if (document.URL.includes("product-details.html")) { // Only executes code on pr
 
 
 /* Load products in checkout page */
-
 if (document.URL.includes("checkout.html")) {
   const cartTotal = document.querySelector("#cart-sum-total"); // Get cart sum text element
-
   // Retrieve and parse the cart array from localStorage
   let cartParsed;
   try {
@@ -380,13 +378,10 @@ if (document.URL.includes("checkout.html")) {
   .then(data => {
     var itemCosts = [];
     let html = "";
-
     // Get IDs from the cart array
     const cartIds = cartParsed.map(item => item.id);
-
     // Filter products to only include those with IDs in the cart
     const cartProducts = data.filter(product => cartIds.includes(product.id));
-
     cartProducts.forEach(product => { // For each product in cartProducts, add the html
       html += `
         <li class="cart-item-entry" productID="${product.id}">
@@ -399,13 +394,11 @@ if (document.URL.includes("checkout.html")) {
       `;
       itemCosts.push(`${product.price}`); // Add costs to itemCosts array
     });
-
     try {
       document.getElementById("cart-list").innerHTML = html; // Apply the html
     } catch (err) {
       console.log(err + " | Page is likely not 'checkout'"); // Error to print if no cart on page
     }
-
     // Calculate the total cost
     const cleanedCost = itemCosts
       .map(cost => parseFloat(cost.replace("£", ""))) // Remove £ and make a number using parsefloat
@@ -433,15 +426,14 @@ if (document.URL.includes("checkout.html")) {
         element.parentNode.remove();
     
         // Sum the total cost again
-        const itemCosts = document.querySelectorAll(".item-cost"); // Get each 
+        const itemCosts = document.querySelectorAll(".item-cost"); // Get each item's cost
         let totalCost = 0;
         itemCosts.forEach(costElement => {
           const cost = parseFloat(costElement.textContent.replace("£", "")); // Remove £ from price
           totalCost += cost; // Add cost of parsed item to total
         });
-    
+
         cartTotal.innerHTML = `Total: £${totalCost.toFixed(2)}`; // Set price html
-    
         // Toast to say item removed
         toastFunction("Item removed from cart!", true);
       });
