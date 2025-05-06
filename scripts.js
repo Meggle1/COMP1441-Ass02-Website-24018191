@@ -284,7 +284,7 @@ if (localStorage.getItem("cart") == null) {
 
 var products = document.getElementsByClassName("productSlot");
 
-var myFunction = function(e) { // Function allows for products open in new tab to be correctly loaded
+var storeClickedProd = function(e) { // Function allows for products open in new tab to be correctly loaded
   if (e.button == 0 || e.button == 1) { // Checks if left clicked or middle clicked
     var productID = this.getAttribute("prodID") // Gets attribute of product element
     localStorage.setItem("clickedProduct", `${productID}`); // Sets clicked product in local storage to maintain across sessions
@@ -292,7 +292,7 @@ var myFunction = function(e) { // Function allows for products open in new tab t
 };
 
 for (var i = 0; i < products.length; i++) {
-  products[i].addEventListener("mousedown", myFunction, false); // Event listener on each product
+  products[i].addEventListener("mousedown", storeClickedProd, false); // Event listener on each product
 }
 
 /* Load product info on product-details page */
