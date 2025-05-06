@@ -3,10 +3,12 @@
 */
 
 // Calculates the current setting by comparing them to 
-function calcSettingAsThemeString({ localStorageTheme}) {
-    if (localStorageTheme !== null) {
-        return localStorageTheme;
-    }
+function calcSettingAsThemeString({ localStorageTheme }) {
+  if (localStorageTheme !== null) {
+      return localStorageTheme;
+  }
+  // Default to light if nothing is set
+  return "light";
 }
   
 // Update button image and aria-label.
