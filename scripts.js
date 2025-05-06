@@ -103,7 +103,7 @@ function toastFunction(text, clearToasts) {
 /* 
     ----- CHECKOUT FORM VALIDATION -----
 */
-
+if (document.URL.includes("checkout.html")) {
 const form = document.querySelector("#form");
 
 const forenameInput = document.querySelector("#forenameInput");
@@ -203,6 +203,7 @@ form.querySelectorAll("input[type='text']").forEach(input => { // Get all input 
     }
   });
 });
+}
 
 /* 
     ----- CANVAS ANIMATION ON FORM SUBMIT -----
@@ -275,6 +276,10 @@ function submitFormAnimation() {
 
 let cart = [];
 
+if (localStorage.getItem("cart") == null) {
+  localStorage.setItem("cart", cart);
+}
+
 /* Saves clicked product to load in session storage */
 
 var products = document.getElementsByClassName("productSlot");
@@ -294,6 +299,7 @@ for (var i = 0; i < products.length; i++) {
 if (document.URL.includes("product-details.html")) { // Only executes code on product-details page
   prodName = document.querySelector("#product-name"); // Get product name header
   prodPrice = document.querySelector("#product-price"); // Get product price header
+  prodForm = document.forms["productSpecForm"]; // Gets add to cart form
   prodImgContainer = document.querySelector(".product-photo"); // Get product image container
   prodDescription = document.querySelector(".prod-desc-body");
   productSpecs = document.querySelector("#productSpecForm");
@@ -307,15 +313,16 @@ if (document.URL.includes("product-details.html")) { // Only executes code on pr
         const jsonProduct = data.find(p => p.id === idToCheck); // Gets product of ID matching the one in local storage
         prodName.innerHTML = jsonProduct.name; // Sets html product name to json element's name
         prodPrice.innerHTML = jsonProduct.price; // Sets html price  to json element's price
+        prodForm.setAttribute("productID", jsonProduct.id);
         prodImgContainer.querySelector("img").setAttribute("src", `${jsonProduct.image}`); // Sets the container's child 'img' src to json element's image value
         prodDescription.innerHTML = jsonProduct.description;
         
         if (jsonProduct.dropdown != undefined) { // If the product has additional options, add the dropdown
           var prodOptions = `
-                          <label for="prod-variation-type">Subject Type:</label>
-                          <select name="prod-variation-type" id="formSubjectType">
-                              <option name="prod-variation-type" id="prodvar_1" value="Option 1">${jsonProduct.dropdown[0]}</option>
-                              <option name="prod-variation-type" id="prodvar_2" value="Option 2">${jsonProduct.dropdown[1]}</option>
+                          <label for="prod-variation-type">Accessory:</label>
+                          <select name="prodVariationType" id="formSubjectType">
+                              <option id="prodvar_1" value="Option 1">${jsonProduct.dropdown[0]}</option>
+                              <option id="prodvar_2" value="Option 2">${jsonProduct.dropdown[1]}</option>
                           </select>
                         `;
           productSpecs.insertAdjacentHTML("afterbegin", prodOptions); // Inserts the dropdown box html
@@ -325,46 +332,84 @@ if (document.URL.includes("product-details.html")) { // Only executes code on pr
       };
   });
   
-  addToCart = document.forms["productSpecForm"]; // Gets add to cart form
-
-  addToCart.addEventListener("submit", getValues);
+  /* Add to local storage cart on button click */
+  prodForm.addEventListener("submit", getValues); // Check for submit, execute funct if so
 
   function getValues(e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevents submission
+    
+    let formData = {
+      "id": prodForm.getAttribute("productID"),
+      "quantity": this.productQuantity.value
+    }
 
-    let data = {}
+    if (this.prodVariationType && this.prodVariationType.value) {
+      formData.accessory = this.prodVariationType.value;
+    }
+
+    // Retrieve the existing cart from localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+    cart.push(formData); // Add item data to cart array
+
+    localStorage.setItem("cart", JSON.stringify(cart)); // Set local cart to cart array
+    toastFunction("Product added to cart!");
+    // window.location.href = "./products.html";
   }
 }
 
+
+
 /* Load products in checkout page */
 
-const cartTotal = document.querySelector("#cart-sum-total");
+if (document.URL.includes("checkout.html")) {
+  const cartTotal = document.querySelector("#cart-sum-total");
 
-fetch("products.json")
-.then(response => response.json())
-.then(data =>{
-    var itemCosts = [];
-    let html = "";
-    data.forEach(product =>{
+  console.log(localStorage.getItem("cart"));
+  // Retrieve and parse the cart array from localStorage
+  let cartParsed;
+  try {
+    cartParsed = JSON.parse(localStorage.getItem("cart")) || [];
+  } catch (error) {
+    console.error("Error parsing cart from localStorage:", error);
+    cartParsed = []; // Reset to an empty array if parsing fails
+    localStorage.setItem("cart", JSON.stringify(cartParsed)); // Reinitialize the cart in localStorage
+  }
+
+  fetch("products.json")
+    .then(response => response.json())
+    .then(data => {
+      var itemCosts = [];
+      let html = "";
+
+      // Get IDs from the cart array
+      const cartIds = cartParsed.map(item => item.id);
+
+      // Filter products to only include those with IDs in the cart
+      const cartProducts = data.filter(product => cartIds.includes(product.id));
+
+      cartProducts.forEach(product => { // For each product in cartProducts, add the html
         html += `
-            <li class="cart-item-entry">
-                <img src="${product.image}">
-                <p class="productname">${product.name}</p>
-                <input type="number" value="1" min="0" aria-label="Current quantity of item in cart">
-                <span class="item-cost">${product.price}</span>
-            </div>
+          <li class="cart-item-entry">
+            <img src="${product.image}">
+            <p class="productname">${product.name}</p>
+            <input type="number" value="1" min="0" aria-label="Current quantity of item in cart">
+            <span class="item-cost">${product.price}</span>
+          </li>
         `;
-        itemCosts.push(`${product.price}`);
+        itemCosts.push(`${product.price}`); // Add costs to itemCosts array
+      });
+
+      try {
+        document.getElementById("cart-list").innerHTML = html; // Apply the html
+      } catch (err) {
+        console.log(err + " | Page is likely not 'checkout'"); // Error to print if no cart on page
+      }
+
+      // Calculate the total cost
+      const cleanedCost = itemCosts
+        .map(cost => parseFloat(cost.replace("£", ""))) // Remove £ and make a number using parsefloat
+        .reduce((sum, current) => sum + current, 0); // Add together the costs
+      cartTotal.innerHTML = `Total: £${cleanedCost.toFixed(2)}`; // Change cart-total html to display price
     });
-    try {
-      document.getElementById("cart-list").innerHTML = html;
-    }
-    catch(err) {
-      console.log(err + " | Page is likely not 'checkout'") // Error to print if no cart on page
-    }
-    // Calculate the total cost
-    const cleanedCost = itemCosts
-    .map(cost => parseFloat(cost.replace("£", ""))) // Remove £ and make a number using parsefloat
-    .reduce((sum, current) => sum + current, 0); // Add together the costs
-    cartTotal.innerHTML = `Total: £${cleanedCost.toFixed(2)}`; // Change cart-total html to display price
-});
+}

@@ -50,10 +50,11 @@
                     <div class="product-details">
                         <h2 id="product-name">Pumpk-itty</h2>
                         <h3 id="product-price">£13.99</h3>
+                        <h4 id="product-id-detail"></h4>
                     </div>
                     
                     <div class="product-specs-container">
-                        <form action="#" id="productSpecForm">
+                        <form action="#" id="productSpecForm" name="productSpecForm" productID="">
 
                             <!-- Options added by JS go above here if any -->
                             <label for="productQuantity">Quantity</label>
@@ -62,7 +63,7 @@
                     </div>
 
                     <div class="addToCart-container">
-                        <button class="addToCart-button" type="submit" form="productSpecForm" >Add to cart</button>
+                        <button class="addToCart-button" id="addToCartBtn" type="submit" form="productSpecForm" >Add to cart</button>
                     </div>
 
                     <section class="product-description">
