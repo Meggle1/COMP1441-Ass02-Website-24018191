@@ -363,9 +363,8 @@ if (document.URL.includes("product-details.html")) { // Only executes code on pr
 /* Load products in checkout page */
 
 if (document.URL.includes("checkout.html")) {
-  const cartTotal = document.querySelector("#cart-sum-total");
+  const cartTotal = document.querySelector("#cart-sum-total"); // Get cart sum text element
 
-  console.log(localStorage.getItem("cart"));
   // Retrieve and parse the cart array from localStorage
   let cartParsed;
   try {
@@ -377,39 +376,75 @@ if (document.URL.includes("checkout.html")) {
   }
 
   fetch("products.json")
-    .then(response => response.json())
-    .then(data => {
-      var itemCosts = [];
-      let html = "";
+  .then(response => response.json())
+  .then(data => {
+    var itemCosts = [];
+    let html = "";
 
-      // Get IDs from the cart array
-      const cartIds = cartParsed.map(item => item.id);
+    // Get IDs from the cart array
+    const cartIds = cartParsed.map(item => item.id);
 
-      // Filter products to only include those with IDs in the cart
-      const cartProducts = data.filter(product => cartIds.includes(product.id));
+    // Filter products to only include those with IDs in the cart
+    const cartProducts = data.filter(product => cartIds.includes(product.id));
 
-      cartProducts.forEach(product => { // For each product in cartProducts, add the html
-        html += `
-          <li class="cart-item-entry">
-            <img src="${product.image}">
-            <p class="productname">${product.name}</p>
-            <input type="number" value="1" min="0" aria-label="Current quantity of item in cart">
-            <span class="item-cost">${product.price}</span>
-          </li>
-        `;
-        itemCosts.push(`${product.price}`); // Add costs to itemCosts array
-      });
-
-      try {
-        document.getElementById("cart-list").innerHTML = html; // Apply the html
-      } catch (err) {
-        console.log(err + " | Page is likely not 'checkout'"); // Error to print if no cart on page
-      }
-
-      // Calculate the total cost
-      const cleanedCost = itemCosts
-        .map(cost => parseFloat(cost.replace("£", ""))) // Remove £ and make a number using parsefloat
-        .reduce((sum, current) => sum + current, 0); // Add together the costs
-      cartTotal.innerHTML = `Total: £${cleanedCost.toFixed(2)}`; // Change cart-total html to display price
+    cartProducts.forEach(product => { // For each product in cartProducts, add the html
+      html += `
+        <li class="cart-item-entry" productID="${product.id}">
+          <img src="${product.image}">
+          <p class="productname">${product.name}</p>
+          <input type="number" value="1" min="0" aria-label="Current quantity of item in cart">
+          <span class="item-cost">${product.price}</span>
+          <button type="button" class="removeItemBtn">X</button>
+        </li>
+      `;
+      itemCosts.push(`${product.price}`); // Add costs to itemCosts array
     });
+
+    try {
+      document.getElementById("cart-list").innerHTML = html; // Apply the html
+    } catch (err) {
+      console.log(err + " | Page is likely not 'checkout'"); // Error to print if no cart on page
+    }
+
+    // Calculate the total cost
+    const cleanedCost = itemCosts
+      .map(cost => parseFloat(cost.replace("£", ""))) // Remove £ and make a number using parsefloat
+      .reduce((sum, current) => sum + current, 0); // Add together the costs
+    cartTotal.innerHTML = `Total: £${cleanedCost.toFixed(2)}`; // Change cart-total html to display price, to fixed is decimal places
+  
+    const removeBtns = document.querySelectorAll(".removeItemBtn");
+  
+    removeBtns.forEach(element => {
+      element.addEventListener("click", () => {
+        // Get the productID of the item to be removed
+        const productID = element.parentNode.getAttribute("productID");
+        // Get the cart from localStorage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        // Filter the item with matching productID
+        const updatedCart = [];
+        cart.forEach(item => {
+          if (item.id !== productID) {
+            updatedCart.push(item);
+          }
+        });
+        // Save cart again
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        // Remove node
+        element.parentNode.remove();
+    
+        // Sum the total cost again
+        const itemCosts = document.querySelectorAll(".item-cost"); // Get each 
+        let totalCost = 0;
+        itemCosts.forEach(costElement => {
+          const cost = parseFloat(costElement.textContent.replace("£", "")); // Remove £ from price
+          totalCost += cost; // Add cost of parsed item to total
+        });
+    
+        cartTotal.innerHTML = `Total: £${totalCost.toFixed(2)}`; // Set price html
+    
+        // Toast to say item removed
+        toastFunction("Item removed from cart!", true);
+      });
+    });
+  });
 }

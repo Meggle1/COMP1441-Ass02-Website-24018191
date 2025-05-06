@@ -123,7 +123,6 @@
     overflow-y: auto;
     font-size: larger;
     #cart-list {
-        padding-right: 1rem;
         display: flex;
         gap: 1rem;
         flex-direction: column;
@@ -136,22 +135,39 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        .removeItemBtn {
+            font-weight: bold;
+            color: red;
+            border: 0.1rem solid black;
+            background-color: #d5a2cd;
+            border-radius: 0.3rem;
+            width: 5%;
+            height: 25%;
+            text-align: center;
+
+        }
+        .removeItemBtn:hover {
+            background-color: #c596be;
+        }
+        .removeItemBtn:active {
+            background-color: #9c7797;
+        }
+        .productname {
+            width: 25%;
+        }
         img {
-            width: 5rem;
+            aspect-ratio: 1 / 1;
             height: 100%;
             object-fit: fill;
         }
-        p {
-            width: 22%;
-        }
         input {
-          width: 25%;
+          width: 20%;
           height: 2rem;
           text-align: center;
           border-radius: 0.5rem;
           padding: 0.1rem;
         }
-        span {
+        .item-cost {
             width: 10%;
         }
     }
